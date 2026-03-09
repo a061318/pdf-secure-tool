@@ -1,0 +1,44 @@
+name: Build PDF Tool EXE
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [ main ]
+
+permissions:
+  contents: write
+
+jobs:
+  build-exe:
+    runs-on: windows-latest
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+      
+    - name: Setup Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.10'
+        
+    - name: Install Python dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install PyPDF2==3.0.0 reportlab==4.0.0 pyinstaller==6.0.0
+        
+    - name: Build executable
+      run: |
+        pyinstaller --onefile --windowed --name "PDF安全工具" pdf_secure_gui.py
+        echo "EXE built successfully"
+        
+    - name: Upload executable
+      uses: actions/upload-artifact@v4
+      with:
+        name: PDF安全工具
+        path: dist/PDF安全工具.exe
+        retention-days: 7
+        
+    - name: Display file info
+      run: |
+        echo "EXE file created:"
+        dir "dist\PDF安全工具.exe"
