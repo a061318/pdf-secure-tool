@@ -1,0 +1,18 @@
+# PDF安全工具依赖库
+# 安装命令: pip install -r requirements.txt
+
+# 核心PDF处理库
+PyPDF2>=3.0.0
+
+# 水印生成库
+reportlab>=4.0.0
+
+# 高级PDF处理（可选，提供更好的加密支持）
+pikepdf>=8.0.0
+
+# 其他工具库
+pillow>=10.0.0  # 图像处理（可选，用于图片水印）
+
+# 开发工具（可选）
+colorama>=0.4.6  # 彩色输出
+tqdm>=4.66.0    # 进度条
